@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Páginas"
+    files:
+      - label: "Página de Inicio"
+        name: "home"
+        file: "data/home.yml"
+        fields:
+          - {label: "Título del Sitio", name: "site_title", widget: "string", default: "Fontanella Producciones"}
+          - {label: "Subtítulo", name: "site_subtitle", widget: "string", default: "Arte, Cuentos & Experiencias"}
+          - label: "Sección Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Badge", name: "badge", widget: "string"}
+              - {label: "Título", name: "title", widget: "string"}
+              - {label: "Subtítulo", name: "subtitle", widget: "string"}
+              - {label: "Descripción", name: "description", widget: "text"}
+              - {label: "Imagen", name: "image", widget: "image"}
+          
+          - label: "Biografía"
+            name: "biography"
+            widget: "object"
+            fields:
+              - {label: "Párrafo 1", name: "p1", widget: "text"}
+              - {label: "Párrafo 2", name: "p2", widget: "text"}
+              - {label: "Párrafo 3", name: "p3", widget: "text"}
+              - {label: "Imagen", name: "image", widget: "image"}
+              - {label: "Cita", name: "quote", widget: "text"}
+              
+  - name: "servicios"
+    label: "Servicios"
+    folder: "data/servicios"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Emoji", name: "emoji", widget: "string", hint: "Ej: 📚"}
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Orden", name: "order", widget: "number", default: 1}
+      
+  - name: "testimonios"
+    label: "Testimonios"
+    folder: "data/testimonios"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Iniciales", name: "initials", widget: "string", hint: "Ej: MJ"}
+      - {label: "Color", name: "color", widget: "select", options: ["yellow", "pink", "green", "blue", "purple"]}
+      - {label: "Nombre Completo", name: "name", widget: "string"}
+      - {label: "Rol/Cargo", name: "role", widget: "string"}
+      - {label: "Testimonio", name: "text", widget: "text"}
+      - {label: "Orden", name: "order", widget: "number", default: 1}
+      
+  - name: "galeria"
+    label: "Galería"
+    folder: "data/galeria"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Tipo", name: "type", widget: "select", options: ["image", "video"]}
+      - {label: "Imagen/Video", name: "media", widget: "image", required: false}
+      - {label: "URL (si no subes archivo)", name: "url", widget: "string", required: false}
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Subtítulo", name: "subtitle", widget: "string"}
+      - {label: "Orden", name: "order", widget: "number", default: 1}
