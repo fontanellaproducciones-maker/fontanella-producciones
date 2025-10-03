@@ -23,6 +23,10 @@
                 <button id="login-btn" class="gradient-gold text-white px-6 py-3 rounded-2xl hover:shadow-lg transition-all flex-1 font-medium">Acceder</button>
                 <button id="cancel-login-btn" class="bg-gray-500 text-white px-6 py-3 rounded-2xl hover:bg-gray-600 transition-all flex-1 font-medium">Cancelar</button>
             </div>
+            <button onclick="downloadChanges()" class="w-full mt-3 bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600">
+              💾 Descargar Cambios para GitHub
+            </button>
+
             <div id="login-error" class="mt-4 text-red-500 text-sm text-center hidden">Contraseña incorrecta. Inténtalo de nuevo.</div>
         </div>
     </div>
@@ -1217,5 +1221,22 @@
             setTimeout(() => notification.remove(), 3000);
         }
     </script>
+    function downloadChanges() {
+    // Esta función descarga el HTML actual de tu página (incluyendo los cambios) como archivo index.html
+    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+    alert('¡Archivo descargado! Sube este archivo a GitHub para que los cambios sean permanentes.');
+}
+
 </body>
 </html>
