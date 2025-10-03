@@ -1238,5 +1238,23 @@
     alert('¡Archivo descargado! Sube este archivo a GitHub para que los cambios sean permanentes.');
 }
 
+<script>
+function downloadChanges() {
+    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    URL.revokeObjectURL(url);
+    alert('¡Archivo descargado! Sube este archivo a GitHub para hacer los cambios permanentes.');
+}
+</script>
+
 </body>
 </html>
