@@ -1364,24 +1364,120 @@
 
 <script>
 function downloadChanges() {
-    // Fuerza que todos los contenteditable tengan su texto actualizado en el DOM
-    document.querySelectorAll('[contenteditable="true"]').forEach(el => {
-        el.innerText = el.innerText;
-    });
-    // Descarga el HTML actual, no el original
+  // Cargar el contenido guardado antes de descargar
+  if (typeof loadSavedContent === 'function') loadSavedContent();
+  if (typeof renderDynamicContent === 'function') renderDynamicContent();
+
+  setTimeout(() => {
+    // Eliminar botones y paneles de administración para descarga limpia
+    const adminElements = document.querySelectorAll('#admin-panel, #login-modal, button[id^="admin"], button[id^="cancel"]');
+    adminElements.forEach(el => el.style.display = 'none');
+
+    // Construir HTML para descargar
     const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    const blob = new Blob([htmlContent], {type:'text/html'});
+    const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
+
+    // Crear enlace de descarga y activar
     const a = document.createElement('a');
     a.href = url;
     a.download = 'index.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+
+    // Revocar URL para liberar memoria
     URL.revokeObjectURL(url);
-    alert('¡Descargado! Sube este archivo a GitHub.');
+
+    // Restaurar paneles admin tras descarga
+    adminElements.forEach(el => el.style.display = '');
+
+    alert('¡Archivo descargado! Sube este index.html a GitHub para ver los cambios.');
+  }, 300);
 }
 
+}
+
+</script>
+<!-- Panel para subir archivos -->
+<div id="uploadPanel" style="background:#f9f9f9; padding:15px; margin:15px 0; border:1px solid #ccc;">
+  <h3>Subir Archivo Multimedia</h3>
+  <input type="file" id="fileUploader" />
+  <button onclick="uploadFile()">Subir y Obtener URL</button>
+  <p id="uploadStatus"></p>
+  <input type="text" id="fileURL" style="width:100%" placeholder="URL generada aquí" readonly />
+  <button onclick="insertURL()">Insertar URL en contenido</button>
+</div>
+
+<script>
+  // Tus datos Cloudinary reales
+  const cloudName = 'dgqxttarn';
+  const uploadPreset = 'fontanella_uploads';
+
+  async function uploadFile() {
+    const fileInput = document.getElementById('fileUploader');
+    const status = document.getElementById('uploadStatus');
+    const fileURL = document.getElementById('fileURL');
+    const file = fileInput.files[0];
+    if (!file) {
+      status.textContent = 'Selecciona un archivo primero';
+      return;
+    }
+
+    status.textContent = 'Subiendo...';
+
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      fileURL.value = data.secure_url;
+      status.textContent = 'Subida completa, copia la URL abajo';
+    } catch (e) {
+      status.textContent = 'Error al subir: ' + e.message;
+    }
+  }
+
+  function insertURL() {
+    const url = document.getElementById('fileURL').value;
+    if (!url) return alert('No hay URL para insertar');
+
+    document.execCommand('insertHTML', false, `<a href="${url}" target="_blank">${url}</a>`);
+  }
+
+  function downloadChanges() {
+    if (typeof loadSavedContent === 'function') loadSavedContent();
+    if (typeof renderDynamicContent === 'function') renderDynamicContent();
+
+    setTimeout(() => {
+      const adminElements = document.querySelectorAll('#admin-panel, #login-modal, button[id^="admin"], button[id^="cancel"]');
+      adminElements.forEach(el => el.style.display = 'none');
+
+      const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+      adminElements.forEach(el => el.style.display = '');
+
+      alert('¡Archivo descargado! Sube este index.html a GitHub.');
+    }, 300);
+  }
 </script>
 
 
