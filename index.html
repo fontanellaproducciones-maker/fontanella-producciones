@@ -1242,6 +1242,42 @@
   }
 </script>
     <script>
+// Función para salir del modo edición
+function exitAdminMode() {
+    const toolbar = document.getElementById('cms-toolbar');
+    const loginModal = document.getElementById('login-modal');
+    const mainNav = document.getElementById('main-nav');
+    
+    if(toolbar) toolbar.classList.add('hidden');
+    if(mainNav) mainNav.style.marginTop = '0';
+    document.body.classList.remove('admin-mode');
+    
+    // Mostrar botón de descarga al salir
+    document.getElementById('download-btn').style.display = 'block';
+}
+
+// Detectar cuando se activa el modo admin (click en login-btn)
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.getElementById('login-btn');
+    if(loginBtn) {
+        loginBtn.addEventListener('click', function() {
+            const password = document.getElementById('admin-password').value;
+            if(password === 'fontanella2025') { // Cambia esto por tu contraseña
+                // Ocultar botón de descarga al entrar en edición
+                document.getElementById('download-btn').style.display = 'none';
+            }
+        });
+    }
+    
+    // Si tienes botón de salir, conectarlo
+    const exitBtn = document.getElementById('exit-admin-btn');
+    if(exitBtn) {
+        exitBtn.addEventListener('click', exitAdminMode);
+    }
+});
+</script>
+
+    <script>
 function downloadChanges() {
     // Cargar el contenido guardado en localStorage antes de descargar
     if (typeof loadSavedContent === 'function') loadSavedContent();
