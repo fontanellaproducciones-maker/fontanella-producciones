@@ -1279,29 +1279,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <script>
 function downloadChanges() {
-    // Cargar el contenido guardado en localStorage antes de descargar
-    if(typeof saveAllContent === 'function') saveAllContent();
+    // Guardar contenido antes de descargar
+    if (typeof saveContent === 'function') saveContent();
     if (typeof loadSavedContent === 'function') loadSavedContent();
     if (typeof renderDynamicContent === 'function') renderDynamicContent();
 
     setTimeout(() => {
-        // Ocultar elementos de administración para descarga limpia
+        // Ocultar elementos de administración
         const adminElements = document.querySelectorAll('#admin-panel, #login-modal, .cms-toolbar, button[id^="admin"], button[id^="cancel"], #download-btn');
         adminElements.forEach(el => {
             if (el) el.style.display = 'none';
         });
 
-        // Remover atributo contenteditable de elementos editables
+        // Remover contenteditable
         document.querySelectorAll('[contenteditable]').forEach(el => {
             el.removeAttribute('contenteditable');
         });
 
-        // Construir HTML completo para descargar
+        // Construir HTML
         const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const blob = new Blob([htmlContent], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
 
-        // Crear enlace de descarga y activar
+        // Descargar
         const a = document.createElement('a');
         a.href = url;
         a.download = 'index.html';
@@ -1310,12 +1310,16 @@ function downloadChanges() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
+        // Mostrar mensaje SIN recargar
         alert('¡Archivo descargado! Sube este index.html a GitHub.');
-
-        // Recargar la página
-        setTimeout(() => location.reload(), 1000);
+        
+        // NO recargar - restaurar visibilidad
+        adminElements.forEach(el => {
+            if (el && el.id !== 'download-btn') el.style.display = '';
+        });
     }, 300);
 }
+
 </script>
 
     <!-- Botón de descarga (solo visible tras salir del modo edición) -->
