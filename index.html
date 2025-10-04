@@ -1241,6 +1241,15 @@
     showNotification('HTML exportado correctamente', 'success');
   }
 </script>
+    <!-- Botón de descarga (solo visible tras salir del modo edición) -->
+<button id="download-btn" onclick="downloadChanges()" 
+        style="display:none; position:fixed; bottom:20px; right:20px; 
+               background:#10b981; color:white; padding:15px 25px; 
+               border:none; border-radius:10px; cursor:pointer; 
+               box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:9999; font-weight:600;">
+    💾 Descargar HTML
+</button>
+
 
 </body>
 </html>
