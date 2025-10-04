@@ -1224,40 +1224,22 @@
 
 <script>
 function downloadChanges() {
-    // Primero, remover el modo edición activo
-    const editables = document.querySelectorAll('[contenteditable="true"]');
-    editables.forEach(el => {
-        el.contentEditable = 'false';
+    // Fuerza que todos los contenteditable tengan su texto actualizado en el DOM
+    document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+        el.innerText = el.innerText;
     });
-    
-    // Remover botones de administración temporalmente
-    const adminPanel = document.getElementById('admin-panel');
-    if(adminPanel) adminPanel.style.display = 'none';
-    
-    // Esperar un momento para que los cambios se apliquen
-    setTimeout(() => {
-        // Obtener HTML actualizado
-        const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'index.html';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        
-        URL.revokeObjectURL(url);
-        
-        // Restaurar modo edición
-        editables.forEach(el => {
-            el.contentEditable = 'true';
-        });
-        if(adminPanel) adminPanel.style.display = '';
-        
-        alert('¡Descargado! Sube este archivo a GitHub.');
-    }, 100);
+    // Descarga el HTML actual, no el original
+    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], {type:'text/html'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert('¡Descargado! Sube este archivo a GitHub.');
 }
 
 </script>
