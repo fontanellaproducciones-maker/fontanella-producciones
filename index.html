@@ -1330,6 +1330,15 @@ function downloadChanges() {
                box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:9999; font-weight:600;">
     💾 Descargar HTML
 </button>
+<!-- Botón discreto para entrar en modo edición -->
+<div style="position:fixed; bottom:80px; right:20px; z-index:9998;">
+    <button onclick="document.getElementById('login-modal').classList.remove('hidden')" 
+            style="background:#6366f1; color:white; padding:12px 20px; 
+                   border:none; border-radius:8px; cursor:pointer; 
+                   box-shadow:0 4px 6px rgba(0,0,0,0.1); font-weight:600;">
+        ✏️ Editar
+    </button>
+</div>
 
 
 </body>
