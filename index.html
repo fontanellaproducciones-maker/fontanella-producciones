@@ -1280,6 +1280,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <script>
 function downloadChanges() {
     // Cargar el contenido guardado en localStorage antes de descargar
+    if(typeof saveAllContent === 'function') saveAllContent();
     if (typeof loadSavedContent === 'function') loadSavedContent();
     if (typeof renderDynamicContent === 'function') renderDynamicContent();
 
