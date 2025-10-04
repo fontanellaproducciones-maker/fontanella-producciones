@@ -1217,5 +1217,27 @@
             setTimeout(() => notification.remove(), 3000);
         }
     </script>
+    <!-- otros scripts y contenidos -->
+
+<script>
+  function exportHTML() {
+    renderDynamicContent(); // Actualiza el DOM con los datos guardados en localStorage
+    const htmlContent = document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fontanella-' + Date.now() + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showNotification('HTML exportado correctamente', 'success');
+  }
+</script>
+
+</body>
+</html>
+
 </body>
 </html>
