@@ -1285,16 +1285,24 @@ function downloadChanges() {
     if (typeof renderDynamicContent === 'function') renderDynamicContent();
 
     setTimeout(() => {
-        // Ocultar elementos de administración
-        const adminElements = document.querySelectorAll('#admin-panel, #login-modal, .cms-toolbar, button[id^="admin"], button[id^="cancel"], #download-btn');
-        adminElements.forEach(el => {
-            if (el) el.style.display = 'none';
-        });
+        // Ocultar SOLO el toolbar de edición, login modal y botón de descarga
+        const toolbar = document.getElementById('cms-toolbar');
+        const loginModal = document.getElementById('login-modal');
+        const downloadBtn = document.getElementById('download-btn');
+        const adminPanel = document.getElementById('admin-panel');
+        
+        if(toolbar) toolbar.style.display = 'none';
+        if(loginModal) loginModal.style.display = 'none';
+        if(downloadBtn) downloadBtn.style.display = 'none';
+        if(adminPanel) adminPanel.style.display = 'none';
 
         // Remover contenteditable
         document.querySelectorAll('[contenteditable]').forEach(el => {
             el.removeAttribute('contenteditable');
         });
+        
+        // Remover clase admin-mode del body
+        document.body.classList.remove('admin-mode');
 
         // Construir HTML
         const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
@@ -1310,15 +1318,16 @@ function downloadChanges() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        // Mostrar mensaje SIN recargar
+        // Restaurar elementos ocultos
+        if(toolbar) toolbar.style.display = '';
+        if(loginModal) loginModal.style.display = '';
+        if(adminPanel) adminPanel.style.display = '';
+        document.body.classList.add('admin-mode');
+
         alert('¡Archivo descargado! Sube este index.html a GitHub.');
-        
-        // NO recargar - restaurar visibilidad
-        adminElements.forEach(el => {
-            if (el && el.id !== 'download-btn') el.style.display = '';
-        });
     }, 300);
 }
+
 
 </script>
 
@@ -1330,15 +1339,6 @@ function downloadChanges() {
                box-shadow:0 4px 6px rgba(0,0,0,0.1); z-index:9999; font-weight:600;">
     💾 Descargar HTML
 </button>
-<!-- Botón discreto para entrar en modo edición -->
-<div style="position:fixed; bottom:80px; right:20px; z-index:9998;">
-    <button onclick="document.getElementById('login-modal').classList.remove('hidden')" 
-            style="background:#6366f1; color:white; padding:12px 20px; 
-                   border:none; border-radius:8px; cursor:pointer; 
-                   box-shadow:0 4px 6px rgba(0,0,0,0.1); font-weight:600;">
-        ✏️ Editar
-    </button>
-</div>
 
 
 </body>
