@@ -1533,5 +1533,23 @@ function downloadChanges() {
     }, 300);
 }
 </script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const adminBtn = document.getElementById('admin-btn');
+  if (adminBtn) {
+    adminBtn.addEventListener('click', function() {
+      console.log('Botón admin clicado');
+      const loginModal = document.getElementById('login-modal');
+      if (loginModal) {
+        console.log('Mostrando modal login');
+        loginModal.classList.remove('hidden');
+      } else {
+        console.log('Modal login no encontrado');
+      }
+    });
+  } else {
+    console.log('Botón admin no encontrado');
+  }
+});
+
 
 </body></html>
