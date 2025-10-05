@@ -1532,6 +1532,94 @@ function downloadChanges() {
         alert('¡Descargado! Sube a GitHub.');
     }, 300);
 }
+<script>
+// ============================================
+// EVENT LISTENERS PRINCIPALES - CÓDIGO REPARADO
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ADMIN BUTTON - Abre el modal de login
+    document.getElementById('admin-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const modal = document.getElementById('login-modal');
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+        document.getElementById('admin-password').focus();
+    });
+    
+    // LOGIN BUTTON - Ejecuta el login
+    document.getElementById('login-btn').addEventListener('click', function() {
+        login();
+    });
+    
+    // CANCEL LOGIN BUTTON - Cierra el modal
+    document.getElementById('cancel-login-btn').addEventListener('click', function() {
+        const modal = document.getElementById('login-modal');
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+        document.getElementById('admin-password').value = '';
+        document.getElementById('login-error').classList.add('hidden');
+    });
+    
+    // ENTER KEY en campo de contraseña
+    document.getElementById('admin-password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            login();
+        }
+    });
+    
+    // EXIT ADMIN MODE BUTTON
+    const exitBtn = document.getElementById('exit-admin-btn');
+    if (exitBtn) {
+        exitBtn.addEventListener('click', function() {
+            exitAdminMode();
+        });
+    }
+    
+    // EXPORT HTML BUTTON
+    const exportHtmlBtn = document.getElementById('export-html-btn');
+    if (exportHtmlBtn) {
+        exportHtmlBtn.addEventListener('click', function() {
+            exportHTML();
+        });
+    }
+    
+    // Inicializar Cloudinary
+    initializeCloudinary();
+    
+    // Cargar contenido guardado
+    if (typeof loadSavedContent === 'function') {
+        loadSavedContent();
+    }
+    if (typeof renderDynamicContent === 'function') {
+        renderDynamicContent();
+    }
+    
+    // CLOUDINARY UPLOAD BUTTON en el modal de edición
+    const cloudinaryUploadBtn = document.getElementById('cloudinary-upload-btn');
+    if (cloudinaryUploadBtn) {
+        cloudinaryUploadBtn.addEventListener('click', function() {
+            openCloudinaryWidget();
+        });
+    }
+});
+
+// Mostrar notificaciones
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+</script>
+
+</body></html>
 
 
 </body></html>
