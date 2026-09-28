@@ -1236,6 +1236,23 @@
     object-fit:contain;
   }
 
+  /* fondo clarito (como en flagship-photos) para las tarjetas internas de
+     Bibliotecas vivas, Escuelas que cuentan, RAICES y Memoria Viva, en vez
+     del fondo oscuro difuminado que usa .photo-blur por defecto */
+  #biblioteca-vivas .section-photo,
+  #escuelas-cuentan .section-photo,
+  #cs-raices .section-photo,
+  #cs-memoria-viva .section-photo{
+    background:var(--cream);
+    border-radius:14px;
+  }
+  #biblioteca-vivas .section-photo .photo-blur,
+  #escuelas-cuentan .section-photo .photo-blur,
+  #cs-raices .section-photo .photo-blur,
+  #cs-memoria-viva .section-photo .photo-blur{
+    display:none;
+  }
+
   /* v7: las cabeceras de categoria vuelven a ser solo color, sin foto,
      y mucho mas estrechas (ver arriba, padding/margin reducidos) */
 
@@ -3346,11 +3363,10 @@
     }
 
     seg.addEventListener('click', () => {
-      if (pinned === key){
-        pinned = null; hide(); setActive(null); hubRow.classList.remove('has-card');
-      } else {
-        pinned = key; render(key); setActive(key); hubRow.classList.add('has-card');
-      }
+      // al pinchar directamente en el circulo/tarjeta, se va siempre a la pagina
+      // principal de esa seccion (no a un elemento concreto de dentro)
+      pinned = null; hide(); setActive(null); hubRow.classList.remove('has-card');
+      navigateTo(key);
     });
 
     seg.addEventListener('keydown', e => {
