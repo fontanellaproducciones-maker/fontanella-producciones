@@ -373,6 +373,7 @@
   .card li:first-child a{border-top:none;}
   .card li a .arrow{opacity:0.4;font-size:14px;transition:transform .15s ease, opacity .15s ease;}
   .card li a:hover .arrow{opacity:1;transform:translateX(3px);}
+  .card li.card-link-all a{font-weight:700;border-top:1px solid rgba(20,33,61,0.16);}
 
   .card.c-nosotras{border-color:var(--green);}
   .card.c-nosotras .eyebrow{background:rgba(26,163,67,0.12);color:var(--green-ink);}
@@ -3195,7 +3196,7 @@
     desc.textContent = s.desc;
     linksEl.innerHTML = s.links.map(([label,href]) =>
       `<li><a href="${href}" data-tab="${key}">${label}<span class="arrow">→</span></a></li>`
-    ).join('');
+    ).join('') + `<li class="card-link-all"><a href="#" data-tab="${key}" data-overview="true">Ver la página completa<span class="arrow">→</span></a></li>`;
     hub.classList.remove('idle');
   }
 
@@ -3318,6 +3319,10 @@
     if (!a) return;
     e.preventDefault();
     const tabKey = a.dataset.tab;
+    if (a.dataset.overview === 'true'){
+      navigateTo(tabKey);
+      return;
+    }
     const targetId = a.getAttribute('href').slice(1);
     navigateTo(tabKey);
     setTimeout(() => {
@@ -3363,10 +3368,11 @@
     }
 
     seg.addEventListener('click', () => {
-      // al pinchar directamente en el circulo/tarjeta, se va siempre a la pagina
-      // principal de esa seccion (no a un elemento concreto de dentro)
-      pinned = null; hide(); setActive(null); hubRow.classList.remove('has-card');
-      navigateTo(key);
+      if (pinned === key){
+        pinned = null; hide(); setActive(null); hubRow.classList.remove('has-card');
+      } else {
+        pinned = key; render(key); setActive(key); hubRow.classList.add('has-card');
+      }
     });
 
     seg.addEventListener('keydown', e => {
