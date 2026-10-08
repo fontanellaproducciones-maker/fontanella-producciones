@@ -1,4 +1,9 @@
-const CACHE_NAME = 'fontanella-cache-v1';
+// v2: antes esto servia SIEMPRE la copia guardada en cache, sin mirar si
+// habia una version nueva en el servidor -- por eso los cambios en la web
+// no se veian para quien ya la habia visitado antes. Ahora se mira primero
+// la red (la version real y actual) y solo se usa la copia guardada si no
+// hay conexion.
+const CACHE_NAME = 'fontanella-cache-v2';
 const APP_SHELL = [
   './',
   './index.html'
@@ -27,17 +32,14 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-          }
-          return response;
-        })
-        .catch(() => cached);
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
