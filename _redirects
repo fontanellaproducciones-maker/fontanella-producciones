@@ -1,1 +1,5 @@
-/*    /index.html   200
+# Unificar en https://www (el canonico). Si ya lo gestiona el panel de Netlify, estas lineas no molestan.
+http://fontanellaproducciones.com/*   https://www.fontanellaproducciones.com/:splat  301!
+https://fontanellaproducciones.com/*  https://www.fontanellaproducciones.com/:splat  301!
+http://www.fontanellaproducciones.com/*  https://www.fontanellaproducciones.com/:splat  301!
+# Ya no hay regla /* -> /index.html: cada ruta tiene su propio archivo y las inexistentes devuelven 404.html con codigo 404.

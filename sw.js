@@ -1,45 +1,33 @@
-// v2: antes esto servia SIEMPRE la copia guardada en cache, sin mirar si
-// habia una version nueva en el servidor -- por eso los cambios en la web
-// no se veian para quien ya la habia visitado antes. Ahora se mira primero
-// la red (la version real y actual) y solo se usa la copia guardada si no
-// hay conexion.
-const CACHE_NAME = 'fontanella-cache-v2';
-const APP_SHELL = [
-  './',
-  './index.html'
-];
+// v3: solo guarda copias de los archivos propios de la web (mismo dominio), con la red primero
+// para que los cambios se vean enseguida, y usa la copia guardada solo si no hay conexion.
+// Antes guardaba cualquier respuesta, tambien de otros dominios y sin limite.
+const CACHE_NAME = 'fontanella-cache-v3';
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
-  );
-  self.skipWaiting();
-});
+self.addEventListener('install', () => { self.skipWaiting(); });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
+      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
     )
   );
   self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return; // terceros (Elfsight, Supabase, fuentes): sin tocar
   event.respondWith(
-    fetch(event.request)
+    fetch(req)
       .then((response) => {
-        if (response && response.status === 200) {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+        if (response && response.status === 200 && response.type === 'basic') {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(req))
   );
 });

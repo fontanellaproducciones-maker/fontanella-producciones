@@ -2,74 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.fontanellaproducciones.com/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/nosotras/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/proyectos/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/videocuentos/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/espectaculos/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.fontanellaproducciones.com/propuestas-mayores/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/imoa/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/palabra-viva/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/propuestas-mayores/</loc>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/blog/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/aviso-legal/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/privacidad/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://www.fontanellaproducciones.com/cookies/</loc>
-    <lastmod>2026-10-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/los-cinco-sentidos/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/los-cinco-elementos/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/bibliotecas-vivas/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/escuelas-que-cuentan/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/raices/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/proyectos/memoria-viva/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/videocuentos/videocuentos-personalizados/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/videocuentos/audiocuentos-personalizados/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/videocuentos/cuentos-en-papel/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/espectaculos/cuentacuentos-y-cantacuentos/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/espectaculos/titeres-y-personajes/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/espectaculos/teatro-y-teatro-de-sombras/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/espectaculos/talleres-creativos/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/espectaculos/narracion-de-libros/</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/blog/por-que-la-narracion-oral-ayuda-a-las-personas-mayores/</loc>
+    <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.fontanellaproducciones.com/blog/regalos-personalizados-bienestar-emocional/</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
 </urlset>
